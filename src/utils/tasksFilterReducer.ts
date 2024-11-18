@@ -1,6 +1,6 @@
 import { FilterValue, Task } from '../types';
 
-const doFilter = (tasks: Task[], filter: FilterValue) => {
+const tasksFilterReducer = (tasks: Task[], filter: FilterValue) => {
   switch (filter) {
     case FilterValue.all:
       return tasks;
@@ -13,4 +13,4 @@ const doFilter = (tasks: Task[], filter: FilterValue) => {
   }
 };
 
-export default doFilter;
+export default tasksFilterReducer;

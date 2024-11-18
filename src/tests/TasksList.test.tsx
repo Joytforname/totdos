@@ -5,7 +5,7 @@ import { Task, FilterValue } from '../types';
 import TasksList from '../components/TasksList';
 
 describe('TasksList component', () => {
-  const tasks: Task[] = [
+  const state: Task[] = [
     { id: '1', label: 'Task 1', checked: false },
     { id: '2', label: 'Completed', checked: true },
     { id: '3', label: 'Task 3', checked: false },
@@ -15,8 +15,8 @@ describe('TasksList component', () => {
     return render(
       <TasksContext.Provider
         value={{
-          tasks,
-          setTasks: jest.fn(),
+          state,
+          dispatch: jest.fn(),
           filter: FilterValue.all,
           setFilter: jest.fn(),
         }}
@@ -33,12 +33,12 @@ describe('TasksList component', () => {
 
   it('renders the correct number of tasks', () => {
     const { getAllByTestId } = renderComponent();
-    expect(getAllByTestId('task-row')).toHaveLength(tasks.length);
+    expect(getAllByTestId('task-row')).toHaveLength(state.length);
   });
 
   it('renders the task title', () => {
     const { getByText } = renderComponent();
-    expect(getByText(tasks[0].label)).toBeInTheDocument();
+    expect(getByText(state[0].label)).toBeInTheDocument();
   });
 
   it('renders the task completed status', () => {

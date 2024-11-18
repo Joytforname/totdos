@@ -2,21 +2,21 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { TasksContext } from './context/todos';
 import { FilterValue, Task } from './types';
 import Field from './components/Field';
 import TasksList from './components/TasksList';
 import Footer from './components/Footer';
-import { Stack } from '@mui/material';
+import taskReducer from './utils/taskReducer';
 
 export default function App() {
-  const [tasks, setTasks] = useState<Task[] | []>([]);
+  const [state, dispatch] = useReducer(taskReducer, []);
   const [filter, setFilter] = useState(FilterValue.all);
-  console.log('filter: ', filter);
+  console.log('state: ', state);
 
   return (
-    <TasksContext.Provider value={{ tasks, setTasks, filter, setFilter }}>
+    <TasksContext.Provider value={{ state, dispatch, filter, setFilter }}>
       <Container maxWidth='sm'>
         <Box sx={{ my: 4 }}>
           <Typography

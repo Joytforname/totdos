@@ -1,8 +1,7 @@
 import { Checkbox, Stack, Typography } from '@mui/material';
-import { Action, Task } from '../types';
-import taskReducer from '../utils/taskReducer';
+import { ActionType, Task } from '../types';
 import { TasksContext } from '../context/todos';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleTwoToneIcon from '@mui/icons-material/CheckCircleTwoTone';
 
@@ -11,15 +10,13 @@ interface TaskProps {
 }
 
 const TaskRow = ({ task }: TaskProps) => {
-  console.log('task: ', task);
-  const { tasks, setTasks } = useContext(TasksContext);
-  useEffect(() => {
-    console.log('tasks: ', tasks);
-  }, [tasks]);
+  const { dispatch } = useContext(TasksContext);
 
   const changeStatus = () => {
-    const newTasks = taskReducer(tasks, Action.mark, task);
-    setTasks(newTasks);
+    dispatch({
+      type: ActionType.mark,
+      payload: task,
+    });
   };
 
   return (

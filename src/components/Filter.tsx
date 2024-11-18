@@ -1,7 +1,7 @@
 import { Button, Stack } from '@mui/material';
 import { TasksContext } from '../context/todos';
 import { useContext } from 'react';
-import doFilter from '../utils/doFilter';
+import tasksFilterReducer from '../utils/tasksFilterReducer';
 import { FilterValue } from '../types';
 import CustomButton from './CustomButton';
 

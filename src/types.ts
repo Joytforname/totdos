@@ -4,11 +4,14 @@ export type Task = {
   id: string;
 };
 
-export enum Action {
+export enum ActionType {
   add = 'add',
   mark = 'mark',
   delete = 'delete',
   deleteDone = 'deleteDone',
+  filterDefault = 'filterDefault',
+  filterActive = 'filterActive',
+  filterCompleted = 'filterCompleted',
 }
 
 export enum FilterValue {

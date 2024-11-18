@@ -9,8 +9,8 @@ describe('Filter component', () => {
     const { getByTestId } = render(
       <TasksContext.Provider
         value={{
-          tasks: [],
-          setTasks: jest.fn(),
+          state: [],
+          dispatch: jest.fn(),
           filter: FilterValue.all,
           setFilter: jest.fn(),
         }}
@@ -28,8 +28,8 @@ describe('Filter component', () => {
     const { getByTestId } = render(
       <TasksContext.Provider
         value={{
-          tasks: [],
-          setTasks: jest.fn(),
+          state: [],
+          dispatch: jest.fn(),
           filter: FilterValue.all,
           setFilter: jest.fn(),
         }}

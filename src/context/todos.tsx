@@ -1,16 +1,17 @@
 import { createContext } from 'react';
-import { FilterValue, Task } from '../types';
+import { ActionType, FilterValue, Task } from '../types';
+import { Action } from '../utils/taskReducer';
 
 interface TasksContextValue {
-  tasks: Task[] | [];
-  setTasks: (tasks: Task[] | []) => void;
+  state: Task[] | [];
+  dispatch: (action: Action) => void;
   filter: FilterValue;
   setFilter: (filter: FilterValue) => void;
 }
 
 export const TasksContext = createContext<TasksContextValue>({
-  tasks: [],
-  setTasks: () => {},
+  state: [],
+  dispatch: () => {},
   filter: FilterValue.all,
   setFilter: () => {},
 });

@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
-import { Task } from '../types';
 import { InputBase, TextField } from '@mui/material';
 import { TasksContext } from '../context/todos';
+import { ActionType } from '../types';
 
 const Field = () => {
-  const { tasks, setTasks } = useContext(TasksContext);
+  const { dispatch } = useContext(TasksContext);
   const [taskLabel, setTaskLabel] = useState('');
 
   return (
@@ -18,10 +18,10 @@ const Field = () => {
       onChange={(e) => setTaskLabel(e.target.value)}
       onKeyDownCapture={(e) => {
         if (e.key === 'Enter' && taskLabel) {
-          setTasks([
-            ...tasks,
-            { label: taskLabel, checked: false, id: Date.now().toString() },
-          ]);
+          dispatch({
+            type: ActionType.add,
+            payload: { label: taskLabel, checked: false, id: Date.now().toString() },
+          });
           setTaskLabel('');
         }
       }}

@@ -1,31 +1,30 @@
-import { Action, Task } from '../types';
+import { ActionType, Task } from '../types';
 
-interface Props {
-  action: string;
-  id: string;
-}
+export type Action = {
+  type: ActionType;
+  payload: Task;
+};
 
-export const initialState = [
-  {
-    name: 'Add a task item',
-    done: false,
-  },
-];
+const taskReducer = (state: Task[], action: Action) => {
+  const { payload, type } = action;
+  const { id } = payload;
 
-const taskReducer = (tasks: Task[], action: Action, task: Task) => {
-  const { id } = task;
-  switch (action) {
-    case Action.add:
-      tasks.push(task);
-      return tasks;
-    case Action.mark:
-      return tasks.map((t: Task) =>
-        t.id === id ? { ...t, checked: !t.checked } : t
-      );
-    case Action.delete:
-      return tasks.filter((t: Task) => t.id !== id);
+  switch (type) {
+    case ActionType.add:
+      return [...state, payload];
+    case ActionType.mark:
+      return [
+        ...state.map((t: Task) =>
+          t.id === id ? { ...t, checked: !t.checked } : t
+        ),
+      ];
+
+    case ActionType.delete:
+      return [...state.filter((t: Task) => t.id !== id)];
+    case ActionType.deleteDone:
+      return [...state.filter((t: Task) => !t.checked)];
     default:
-      return tasks;
+      return state;
   }
 };
 

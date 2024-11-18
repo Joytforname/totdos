@@ -3,12 +3,12 @@ import TaskRow from './TaskRow';
 import { Task } from '../types';
 import { TasksContext } from '../context/todos';
 import { useContext } from 'react';
-import doFilter from '../utils/doFilter';
+import tasksFilterReducer from '../utils/tasksFilterReducer';
 
 const TasksList = () => {
-  const { tasks, filter } = useContext(TasksContext);
+  const { state, filter } = useContext(TasksContext);
 
-  const filteredTasks = doFilter(tasks, filter);
+  const filteredTasks = tasksFilterReducer(state, filter);
 
   return (
     <Stack data-testid='tasks-list'>
