@@ -5,15 +5,17 @@ interface CustomButtonProps {
   onClick: () => void;
   isActive: boolean;
   testid: string;
+  disabled?: boolean;
 }
 
 const CustomButton = (props: CustomButtonProps) => {
-  const { label, onClick, isActive, testid } = props;
+  const { label, onClick, isActive, testid, disabled = false } = props;
+
   return (
     <Button
       data-testid={testid}
       size='small'
-      variant='outlined'
+      variant='text'
       sx={{
         textTransform: 'none',
         fontWeight: 'light',
@@ -22,8 +24,12 @@ const CustomButton = (props: CustomButtonProps) => {
         maxHeight: '25px',
         border: isActive ? '1px solid #838383' : 'none',
         color: '#838383',
+        '&:disabled': {
+          px: 1,
+        },
       }}
       onClick={onClick}
+      disabled={disabled}
     >
       {label}
     </Button>

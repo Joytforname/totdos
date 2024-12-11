@@ -6,7 +6,9 @@ import { FilterValue } from '../types';
 import CustomButton from './CustomButton';
 
 const Filter = () => {
-  const { filter, setFilter } = useContext(TasksContext);
+  const { state, filter, setFilter } = useContext(TasksContext);
+  const isHaveActiveTasks = state.some((task) => task.checked === false);
+  const isHaveCompleted = state.some((task) => task.checked === true);
 
   const handleFilter = (value: FilterValue) => {
     setFilter(value);
@@ -25,12 +27,14 @@ const Filter = () => {
         label='Active'
         onClick={() => handleFilter(FilterValue.active)}
         isActive={filter === FilterValue.active}
+        disabled={!isHaveActiveTasks}
       />
       <CustomButton
         testid='filter-button-completed'
         label='Completed'
         onClick={() => handleFilter(FilterValue.completed)}
         isActive={filter === FilterValue.completed}
+        disabled={!isHaveCompleted}
       />
     </Stack>
   );

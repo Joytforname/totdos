@@ -13,7 +13,6 @@ import taskReducer from './utils/taskReducer';
 export default function App() {
   const [state, dispatch] = useReducer(taskReducer, []);
   const [filter, setFilter] = useState(FilterValue.all);
-  console.log('state: ', state);
 
   return (
     <TasksContext.Provider value={{ state, dispatch, filter, setFilter }}>
@@ -27,12 +26,38 @@ export default function App() {
           >
             todos
           </Typography>
-          <Paper square variant='outlined'>
-            <Box sx={{ p: 1, mb: 0 }}>
+          <Paper
+            square
+            variant='outlined'
+            sx={{ minHeight: 200, position: 'relative', pb: '42px' }}
+          >
+            <Box
+              sx={{
+                p: 1,
+                mb: 0,
+                borderBottom: state.length ? 'none' : '1px solid #E0E0E0',
+              }}
+            >
               <Field />
             </Box>
             <TasksList />
-            <Footer />
+            {!state.length && (
+              <Typography
+                variant='h4'
+                color='#E0E0E0'
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                No todos
+              </Typography>
+            )}
+            <Box sx={{ position: 'absolute', bottom: 0, width: '100%' }}>
+              <Footer />
+            </Box>
           </Paper>
         </Box>
       </Container>

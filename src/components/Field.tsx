@@ -9,7 +9,11 @@ const Field = () => {
 
   return (
     <InputBase
-      sx={{ border: 'none', outline: 'none', p: 0 }}
+      sx={{
+        border: 'none',
+        outline: 'none',
+        p: 0,
+      }}
       data-testid='field'
       value={taskLabel}
       placeholder='What needs to be done?'
@@ -20,7 +24,11 @@ const Field = () => {
         if (e.key === 'Enter' && taskLabel) {
           dispatch({
             type: ActionType.add,
-            payload: { label: taskLabel, checked: false, id: Date.now().toString() },
+            payload: {
+              label: taskLabel,
+              checked: false,
+              id: Date.now().toString(),
+            },
           });
           setTaskLabel('');
         }

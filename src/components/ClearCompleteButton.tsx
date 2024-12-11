@@ -4,7 +4,8 @@ import CustomButton from './CustomButton';
 import { ActionType } from '../types';
 
 const ClearCompleteButton = () => {
-  const { dispatch } = useContext(TasksContext);
+  const {state, dispatch } = useContext(TasksContext);
+  const isHaveCompleted = state.some((task) => task.checked === true);
 
   return (
     <CustomButton
@@ -12,6 +13,7 @@ const ClearCompleteButton = () => {
       label='Clear completed'
       onClick={() => dispatch({ payload: {label: '', checked: false, id: ''}, type: ActionType.deleteDone })}
       isActive={false}
+      disabled={!isHaveCompleted}
     />
   );
 };

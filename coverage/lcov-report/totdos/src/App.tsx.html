@@ -160,7 +160,6 @@ import taskReducer from './utils/taskReducer';
 export default function App() {
   const [state, dispatch] = useReducer(taskReducer, []);
   const [filter, setFilter] = useState(FilterValue.all);
-  console.log('state: ', state);
 &nbsp;
   return (
     &lt;TasksContext.Provider value={{ state, dispatch, filter, setFilter }}&gt;
